@@ -1,0 +1,25 @@
+services:
+  # mcp:
+    # build:
+      # context: ./mcp
+      # dockerfile: Dockerfile
+    # image: archon-mcp:latest
+    # container_name: archon-mcp
+    # restart: unless-stopped
+
+  archon:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: archon:latest
+    container_name: archon-container
+    ports:
+      - "8501:8501"
+      - "8100:8100"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env
+    restart: unless-stopped
+    #depends_on:
+     # - mcp
